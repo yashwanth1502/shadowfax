@@ -1,0 +1,117 @@
+import java.util.Scanner;
+public class EnhancedCalculator {
+    static Scanner input = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int choice;
+
+        do {
+            showMainMenu();
+            choice = input.nextInt();
+
+            switch (choice) {
+                case 1 -> basicArithmetic();
+                case 2 -> scientificCalculator();
+                case 3 -> unitConversion();
+                case 0 -> System.out.println("Thank you for using the calculator!");
+                default -> System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 0);
+    }
+
+    static void showMainMenu() {
+        System.out.println("\n=== Enhanced Calculator ===");
+        System.out.println("1. Basic Arithmetic");
+        System.out.println("2. Scientific Calculations");
+        System.out.println("3. Unit Conversions");
+        System.out.println("0. Exit");
+        System.out.print("Choose an option: ");
+    }
+
+    static void basicArithmetic() {
+        System.out.print("Enter first number: ");
+        double num1 = input.nextDouble();
+        System.out.print("Enter operator (+, -, *, /): ");
+        char operator = input.next().charAt(0);
+        System.out.print("Enter second number: ");
+        double num2 = input.nextDouble();
+
+        switch (operator) {
+            case '+' -> System.out.println("Result: " + (num1 + num2));
+            case '-' -> System.out.println("Result: " + (num1 - num2));
+            case '*' -> System.out.println("Result: " + (num1 * num2));
+            case '/' -> {
+                if (num2 != 0)
+                    System.out.println("Result: " + (num1 / num2));
+                else
+                    System.out.println("Error: Cannot divide by zero.");
+            }
+            default -> System.out.println("Invalid operator.");
+        }
+    }
+
+    static void scientificCalculator() {
+        System.out.println("\nScientific Options:");
+        System.out.println("1. Square Root");
+        System.out.println("2. Exponentiation (x^y)");
+        System.out.print("Choose an option: ");
+        int choice = input.nextInt();
+
+        switch (choice) {
+            case 1 -> {
+                System.out.print("Enter number: ");
+                double num = input.nextDouble();
+                if (num >= 0)
+                    System.out.println("Square root: " + Math.sqrt(num));
+                else
+                    System.out.println("Error: Cannot take square root of negative number.");
+            }
+            case 2 -> {
+                System.out.print("Enter base: ");
+                double base = input.nextDouble();
+                System.out.print("Enter exponent: ");
+                double exponent = input.nextDouble();
+                System.out.println("Result: " + Math.pow(base, exponent));
+            }
+            default -> System.out.println("Invalid option.");
+        }
+    }
+
+    static void unitConversion() {
+        System.out.println("\nUnit Conversion Options:");
+        System.out.println("1. Celsius to Fahrenheit");
+        System.out.println("2. Fahrenheit to Celsius");
+        System.out.println("3. USD to EUR (Rate: 1 USD = 0.9 EUR)");
+        System.out.println("4. EUR to USD (Rate: 1 EUR = 1.11 USD)");
+        System.out.print("Choose an option: ");
+        int choice = input.nextInt();
+
+        switch (choice) {
+            case 1 -> {
+                System.out.print("Enter Celsius: ");
+                double c = input.nextDouble();
+                double f = (c * 9 / 5) + 32;
+                System.out.println("Fahrenheit: " + f);
+            }
+            case 2 -> {
+                System.out.print("Enter Fahrenheit: ");
+                double f = input.nextDouble();
+                double c = (f - 32) * 5 / 9;
+                System.out.println("Celsius: " + c);
+            }
+            case 3 -> {
+                System.out.print("Enter USD: ");
+                double usd = input.nextDouble();
+                double eur = usd * 0.9;
+                System.out.println("EUR: " + eur);
+            }
+            case 4 -> {
+                System.out.print("Enter EUR: ");
+                double eur = input.nextDouble();
+                double usd = eur * 1.11;
+                System.out.println("USD: " + usd);
+            }
+            default -> System.out.println("Invalid option.");
+        }
+    }
+}
